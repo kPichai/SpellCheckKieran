@@ -4,7 +4,7 @@
  * for Adventures in Algorithms
  * At Menlo School in Atherton, CA
  *
- * Completed by: [YOUR NAME HERE]
+ * Completed by: Kieran Pichai
  * */
 
 public class SpellCheck {
@@ -17,8 +17,26 @@ public class SpellCheck {
      * @param dictionary The list of all accepted words.
      * @return String[] of all mispelled words in the order they appear in text. No duplicates.
      */
-    public String[] checkWords(String[] text, String[] dictionary) {
+    public String[] generateHashmap(String[] dictionary) {
+            String[] test = new String[1000000000];
+            for (int i = 0; i < 100; i++) {
+                test[(int)hashString(dictionary[i])] = dictionary[i];
+            }
 
-        return null;
+            return test;
+    }
+
+    public long hashString(String stringToHash) {
+        long hash = 7;
+        for (int i = 0; i < stringToHash.length(); i++) {
+            hash = hash * 31 + stringToHash.charAt(i);
+        }
+        System.out.println(hash);
+        return hash;
+    }
+
+    public String[] checkWords(String[] text, String[] dictionary) {
+        String[] test = generateHashmap(dictionary);
+        return test;
     }
 }

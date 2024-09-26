@@ -1,9 +1,10 @@
-Name: YOUR NAME HERE
+Name: Kieran Pichai
 
-| Date    |  Time  |                                     Update |
-|:--------|:------:|-------------------------------------------:|
-| April 5 | 9-10pm | I tried to write abstract, efficient code. |
-|         |        |                                            |
+| Date     |       Time        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Update |
+|:---------|:-----------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Sept. 23 |  9:35am - 9:55am  | In this initial thought process I talked to some class mates about some ideas for the process we might implement on this program. Initially we considered things like linear search and binary search but ultimately decided that a map would be the most efficient way of sorting out this problem. However, what me and tony discussed was one main problem: how to assign each string to a unique value in a map. This would have to involve some sort of function that converts strings into unique ints. |
+| Sept. 24 |  1:50pm - 2:25pm  |                                                                                                                                                                           In this section, I continued to think about a map and came up with an idea that would use a hashmap. Essentially what a hashmap does is create a key/item relationship in which if we created a hashmap that aligns a string with an int, we could use the string to get check if its in the dictionary, an O(1) lookup like a map. |
+| Sept. 25 | 10:15pm - 10:45pm |                                                                                                                                           In this scenario I actually tried to code a hash function using prime numbers, as apparently that increases the distribution of strings across ints and decreases the probability of overlap. However, my code didn't work and runs into int overflow issues and also issues with using the indicies of the map. I'm going to try to fix this on my next iteration. |
 
 
 To add a new row to the table, click into a cell and then hit shift-enter.

@@ -11,6 +11,10 @@ public class Node {
         this.nextSet = nextSet;
     }
 
+    public boolean getWordEnd() {
+        return isWordEnd;
+    }
+
     public void setWordEnd(boolean wordEnd) {
         isWordEnd = wordEnd;
     }

@@ -1,6 +1,4 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
  * Spell Check
@@ -19,26 +17,12 @@ public class SpellCheck {
      * @param dictionary The list of all accepted words.
      * @return String[] of all mispelled words in the order they appear in text. No duplicates.
      */
-//    public Boolean[] generateHashmap(String[] dictionary) {
-//        Boolean[] test = new Boolean[1000000000];
-//        for (String s : dictionary) {
-//            test[(int) hashString(s)] = true;
-//        }
-//        return test;
-//    }
-//
-//    public long hashString(String stringToHash) {
-//        long hash = 5;
-//        for (int i = 0; i < stringToHash.length(); i++) {
-//            hash = hash * 7 + (stringToHash.charAt(i) - 64);
-//        }
-//        return hash;
-//    }
+
     public Trie createTrie(String[] dictionary) {
-        Trie dict = new Trie(new Node(false));
+        Trie dict = new Trie();
 
         for (String s : dictionary) {
-            dict.insert(s, dict.getRoot());
+            dict.insert(s);
         }
 
         return dict;
@@ -46,9 +30,11 @@ public class SpellCheck {
 
     public String[] checkTrie(Trie trie, String[] text) {
         ArrayList<String> notInTrie = new ArrayList<String>();
+        Trie misspelledTrie = new Trie();
 
         for (String s : text) {
-            if (!trie.inTrie(s, trie.getRoot())) {
+            if (!trie.inTrie(s) && !misspelledTrie.inTrie(s)) {
+                misspelledTrie.insert(s);
                 notInTrie.add(s);
             }
         }
@@ -58,15 +44,6 @@ public class SpellCheck {
     }
 
     public String[] checkWords(String[] text, String[] dictionary) {
-//        Boolean[] test = generateHashmap(dictionary);
-//        ArrayList<String> incorrect = new ArrayList<String>();
-//        for (String word : text) {
-//            if (!test[(int) hashString(word)]) {
-//                incorrect.add(word);
-//            }
-//        }
-//        String[] wrong = new String[incorrect.size()];
-//        return incorrect.toArray(wrong);
         Trie dictionaryTrie = createTrie(dictionary);
         return checkTrie(dictionaryTrie, text);
     }

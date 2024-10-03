@@ -34,8 +34,27 @@ public class SpellCheck {
 //        }
 //        return hash;
 //    }
-    public Trie createTrie () {
-        return null;
+    public Trie createTrie(String[] dictionary) {
+        Trie dict = new Trie(new Node(false));
+
+        for (String s : dictionary) {
+            dict.insert(s, dict.getRoot());
+        }
+
+        return dict;
+    }
+
+    public String[] checkTrie(Trie trie, String[] text) {
+        ArrayList<String> notInTrie = new ArrayList<String>();
+
+        for (String s : text) {
+            if (!trie.inTrie(s, trie.getRoot())) {
+                notInTrie.add(s);
+            }
+        }
+
+        String[] notFound = new String[notInTrie.size()];
+        return notInTrie.toArray(notFound);
     }
 
     public String[] checkWords(String[] text, String[] dictionary) {
@@ -48,5 +67,7 @@ public class SpellCheck {
 //        }
 //        String[] wrong = new String[incorrect.size()];
 //        return incorrect.toArray(wrong);
+        Trie dictionaryTrie = createTrie(dictionary);
+        return checkTrie(dictionaryTrie, text);
     }
 }

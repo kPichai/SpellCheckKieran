@@ -7,10 +7,6 @@ public class Node {
         this.isWordEnd = isWordEnd;
     }
 
-    public void setNextSet(Node[] nextSet) {
-        this.nextSet = nextSet;
-    }
-
     public boolean getWordEnd() {
         return isWordEnd;
     }

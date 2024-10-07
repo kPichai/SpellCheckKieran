@@ -43,8 +43,35 @@ public class SpellCheck {
         return notInTrie.toArray(notFound);
     }
 
+    public TST createTST(String[] dictionary) {
+        TST dict = new TST();
+
+        for (String s : dictionary) {
+            dict.insert(s);
+        }
+
+        return dict;
+    }
+
+    public String[] checkTST(TST tst, String[] text) {
+        ArrayList<String> notInTST = new ArrayList<String>();
+        TST misspelledTST = new TST();
+
+        for (String s : text) {
+            if (!tst.inTST(s) && !misspelledTST.inTST(s)) {
+                misspelledTST.insert(s);
+                notInTST.add(s);
+            }
+        }
+
+        String[] notFound = new String[notInTST.size()];
+        return notInTST.toArray(notFound);
+    }
+
     public String[] checkWords(String[] text, String[] dictionary) {
-        Trie dictionaryTrie = createTrie(dictionary);
-        return checkTrie(dictionaryTrie, text);
+//        Trie dictionaryTrie = createTrie(dictionary);
+//        return checkTrie(dictionaryTrie, text);
+        TST dictionaryTrie = createTST(dictionary);
+        return checkTST(dictionaryTrie, text);
     }
 }

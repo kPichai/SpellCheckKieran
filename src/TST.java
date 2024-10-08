@@ -1,14 +1,18 @@
 public class TST {
     private TSTNode root;
 
+    // Constructor for TST class, starts with m to split dictionary roughly in half
     public TST() {
         root = new TSTNode('m', false);
     }
 
+    // Insert function to simplify input (so its just a string)
     public void insert(String s) {
+        // Calls actual insert function
         root = insert(s, 0, root);
     }
 
+    // Full insert function (recursive)
     public TSTNode insert(String s, int curIndex, TSTNode curRoot) {
         if (curIndex == s.length()) {
             return curRoot;

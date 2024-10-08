@@ -5,6 +5,7 @@ public class TSTNode {
     private char nodeChar;
     private boolean endOfWord;
 
+    // Constructor for TSTNode
     public TSTNode(char nodeChar, boolean endOfWord) {
         this.left = null;
         this.middle = null;
@@ -12,6 +13,8 @@ public class TSTNode {
         this.nodeChar = nodeChar;
         this.endOfWord = endOfWord;
     }
+
+    // Getters and Setters for instance variables
 
     public TSTNode getLeft() {
         return left;

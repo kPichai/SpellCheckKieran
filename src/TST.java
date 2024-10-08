@@ -8,28 +8,31 @@ public class TST {
 
     // Insert function to simplify input (so its just a string)
     public void insert(String s) {
-        // Calls actual insert function
         root = insert(s, 0, root);
     }
 
     // Full insert function (recursive)
     public TSTNode insert(String s, int curIndex, TSTNode curRoot) {
+        // Base case in which we reach end of string
         if (curIndex == s.length()) {
             return curRoot;
         }
-
         char curChar = s.charAt(curIndex);
+        // Checks empty curRoot
         if (curRoot == null) {
             curRoot = new TSTNode(curChar, false);
         }
+        // Recursive cases if left, right, or middle
         if (curChar < curRoot.getNodeChar()) {
             curRoot.setLeft(insert(s, curIndex, curRoot.getLeft()));
         } else if (curChar > curRoot.getNodeChar()) {
             curRoot.setRight(insert(s, curIndex, curRoot.getRight()));
         } else {
+            // Checks end of word case
             if (curIndex == s.length() - 1) {
                 curRoot.setEndOfWord(true);
             } else {
+                // If not, continues along middle path with recursive calls
                 curRoot.setMiddle(insert(s, curIndex + 1, curRoot.getMiddle()));
             }
         }
@@ -37,36 +40,18 @@ public class TST {
         return curRoot;
     }
 
-    public TSTNode insertOld(String s, int curIndex, TSTNode curRoot) {
-        if (curIndex >= s.length() - 1) {
-            if (curRoot != null) {
-                curRoot.setEndOfWord(true);
-            } else {
-                curRoot = new TSTNode(s.charAt(curIndex), true);
-            }
-            return curRoot;
-        }
-        if (curRoot == null) {
-            curRoot = new TSTNode(s.charAt(curIndex), false);
-            curRoot.setMiddle(insert(s, curIndex + 1, curRoot.getMiddle()));
-        } else if (s.charAt(curIndex) < curRoot.getNodeChar()) {
-            curRoot.setLeft(insert(s, curIndex, curRoot.getLeft()));
-        } else if (s.charAt(curIndex) > curRoot.getNodeChar()) {
-            curRoot.setRight(insert(s, curIndex, curRoot.getRight()));
-        } else {
-            curRoot.setMiddle(insert(s, curIndex + 1, curRoot.getMiddle()));
-        }
-        return curRoot;
-    }
-
+    // inTST method is a search method that searches for a given string
     public boolean inTST(String s) {
         TSTNode curNode = root;
-
+        // Loops through length of string
         for (int i = 0; i < s.length();) {
+            // Checks if it current node is null, if so you cannot find the word
             if (curNode == null) {
                 return false;
             }
+            // Checks if you accept letter, cases for left middle and right
             if (s.charAt(i) == curNode.getNodeChar()) {
+                // End case check
                 if (i == s.length() - 1) {
                     return curNode.isEndOfWord();
                 }
@@ -78,9 +63,11 @@ public class TST {
                 curNode = curNode.getRight();
             }
         }
+        // If it gets through whole string without finding end returns false
         return false;
     }
 
+    // Getter for root
     public TSTNode getRoot() {
         return root;
     }

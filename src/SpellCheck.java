@@ -21,7 +21,6 @@ public class SpellCheck {
     // createTrie methods generated a trie to store dictionary and returns it
     public Trie createTrie(String[] dictionary) {
         Trie dict = new Trie();
-
         // Loops through all strings in the dictionary and inserts it into the trie
         for (String s : dictionary) {
             dict.insert(s);
@@ -35,7 +34,6 @@ public class SpellCheck {
         ArrayList<String> notInTrie = new ArrayList<String>();
         // Creates a trie of misspelled words so that no duplicates are appended
         Trie misspelledTrie = new Trie();
-
         // Loops through all strings in the text and checks if its not a duplicate and not a word
         for (String s : text) {
             if (!trie.inTrie(s) && !misspelledTrie.inTrie(s)) {
@@ -44,7 +42,6 @@ public class SpellCheck {
                 notInTrie.add(s);
             }
         }
-
         // Creates a string array to return as the final list of misspelled words
         String[] notFound = new String[notInTrie.size()];
         return notInTrie.toArray(notFound);
@@ -81,8 +78,8 @@ public class SpellCheck {
     // Main function that runs all helper functions above
     public String[] checkWords(String[] text, String[] dictionary) {
         // Code to run Trie:
-            // Trie dictionaryTrie = createTrie(dictionary);
-            // return checkTrie(dictionaryTrie, text);
+//             Trie dictionaryTrie = createTrie(dictionary);
+//             return checkTrie(dictionaryTrie, text);
         // Code to run TST (I chose to implement TST as in my cases it runs quite a bit more efficiently)
         TST dictionaryTST = createTST(dictionary);
         return checkTST(dictionaryTST, text);

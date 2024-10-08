@@ -28,7 +28,7 @@ public class Trie {
         // Loops through indices in string and checks if each exists
         for (int i = 0; i < searchFor.length(); i++) {
             curPos = curPos.getNextSet()[searchFor.charAt(i)];
-
+            // Early exit condition
             if (curPos == null) {
                 return false;
             }

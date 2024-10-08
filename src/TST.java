@@ -10,6 +10,30 @@ public class TST {
     }
 
     public TSTNode insert(String s, int curIndex, TSTNode curRoot) {
+        if (curIndex == s.length()) {
+            return curRoot;
+        }
+
+        char curChar = s.charAt(curIndex);
+        if (curRoot == null) {
+            curRoot = new TSTNode(curChar, false);
+        }
+        if (curChar < curRoot.getNodeChar()) {
+            curRoot.setLeft(insert(s, curIndex, curRoot.getLeft()));
+        } else if (curChar > curRoot.getNodeChar()) {
+            curRoot.setRight(insert(s, curIndex, curRoot.getRight()));
+        } else {
+            if (curIndex == s.length() - 1) {
+                curRoot.setEndOfWord(true);
+            } else {
+                curRoot.setMiddle(insert(s, curIndex + 1, curRoot.getMiddle()));
+            }
+        }
+
+        return curRoot;
+    }
+
+    public TSTNode insertOld(String s, int curIndex, TSTNode curRoot) {
         if (curIndex >= s.length() - 1) {
             if (curRoot != null) {
                 curRoot.setEndOfWord(true);

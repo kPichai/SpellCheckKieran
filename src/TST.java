@@ -6,29 +6,29 @@ public class TST {
     }
 
     public void insert(String s) {
-        boolean newWord = false;
-        TSTNode curNode = root;
+        root = insert(s, 0, root);
+    }
 
-        for (int i = 0; i < s.length(); i++) {
-            char curChar = s.charAt(i);
-            if (curNode == null) {
-                curNode = new TSTNode(curChar, false);
-                newWord = true;
+    public TSTNode insert(String s, int curIndex, TSTNode curRoot) {
+        if (curIndex >= s.length() - 1) {
+            if (curRoot != null) {
+                curRoot.setEndOfWord(true);
+            } else {
+                curRoot = new TSTNode(s.charAt(curIndex), true);
             }
-
-            if (!newWord && curChar < curNode.getNodeChar()) {
-                curNode = curNode.getLeft();
-            } else if (!newWord && curChar == curNode.getNodeChar()) {
-                curNode = curNode.getMiddle();
-            } else if (!newWord && curChar > curNode.getNodeChar()) {
-                curNode = curNode.getRight();
-            } else if (newWord) {
-                curNode = curNode.getMiddle();
-            }
+            return curRoot;
         }
-        if (curNode == null) {
-            curNode = new TSTNode(s.charAt(s.length() - 1), true);
+        if (curRoot == null) {
+            curRoot = new TSTNode(s.charAt(curIndex), false);
+            curRoot.setMiddle(insert(s, curIndex + 1, curRoot.getMiddle()));
+        } else if (s.charAt(curIndex) < curRoot.getNodeChar()) {
+            curRoot.setLeft(insert(s, curIndex, curRoot.getLeft()));
+        } else if (s.charAt(curIndex) > curRoot.getNodeChar()) {
+            curRoot.setRight(insert(s, curIndex, curRoot.getRight()));
+        } else {
+            curRoot.setMiddle(insert(s, curIndex + 1, curRoot.getMiddle()));
         }
+        return curRoot;
     }
 
     public boolean inTST(String s) {
@@ -39,18 +39,18 @@ public class TST {
                 return false;
             }
             if (s.charAt(i) == curNode.getNodeChar()) {
-                curNode = root.getMiddle();
+                if (i == s.length() - 1) {
+                    return curNode.isEndOfWord();
+                }
+                curNode = curNode.getMiddle();
                 i++;
             } else if (s.charAt(i) < curNode.getNodeChar()) {
-                curNode = root.getLeft();
+                curNode = curNode.getLeft();
             } else if (s.charAt(i) > curNode.getNodeChar()) {
-                curNode = root.getRight();
+                curNode = curNode.getRight();
             }
         }
-        if (curNode == null) {
-            return false;
-        }
-        return curNode.isEndOfWord();
+        return false;
     }
 
     public TSTNode getRoot() {

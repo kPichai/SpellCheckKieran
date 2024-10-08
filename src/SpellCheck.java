@@ -71,7 +71,7 @@ public class SpellCheck {
     public String[] checkWords(String[] text, String[] dictionary) {
 //        Trie dictionaryTrie = createTrie(dictionary);
 //        return checkTrie(dictionaryTrie, text);
-        TST dictionaryTrie = createTST(dictionary);
-        return checkTST(dictionaryTrie, text);
+        TST dictionaryTST = createTST(dictionary);
+        return checkTST(dictionaryTST, text);
     }
 }
